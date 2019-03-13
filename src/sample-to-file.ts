@@ -3,12 +3,16 @@ import * as replaceInFile from 'replace-in-file';
 import * as util from 'util';
 
 class SampleToFile {
-  private host: string;
+  private placeholder: RegExp;
+  private value: string;
   private destFile: string;
   private srcFile: string;
 
-  constructor(host: string, srcFile: string, destFile: string) {
-    this.host = host;
+  constructor(ph: string, value: string, srcFile: string, destFile: string) {
+    const placeholder = `{{${ph}}}`;
+
+    this.placeholder = new RegExp(placeholder, 'g');
+    this.value = value;
     this.destFile = `${process.cwd()}/${destFile}`;
     this.srcFile = `${process.cwd()}/${srcFile}`;
   }
@@ -65,8 +69,8 @@ class SampleToFile {
   private replacePlaceholder() {
     const options = {
       files: this.destFile,
-      from: /{{hostname}}/g,
-      to: this.host,
+      from: this.placeholder,
+      to: this.value,
     };
 
     return replaceInFile(options);
@@ -115,8 +119,15 @@ export function sampleToFile(argv: any): any {
     );
   }
 
-  if (!argv.host) {
-    console.info('Please define a host with the host flag (e.g. --host=http://localhost:666)');
+  if (!argv.ph) {
+    console.info(
+      'Please define a placeholder with the ph flag (e.g. --ph=testPlaceholder). The source file must contain this placeholder with double brackets (e.g. {{testPlaceholder}}). This is what will get replaced with the value defined in the value flag.',
+    );
+    return false;
+  }
+
+  if (!argv.value) {
+    console.info('Please define a value with the value flag (e.g. --value=testValue).');
     return false;
   }
 
@@ -130,5 +141,5 @@ export function sampleToFile(argv: any): any {
     return false;
   }
 
-  return new SampleToFile(argv.host, argv.src, argv.dest);
+  return new SampleToFile(argv.ph, argv.value, argv.src, argv.dest);
 }
