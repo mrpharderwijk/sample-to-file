@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "no-console": [true, "log"]
+  },
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "sample-to",
+  "version": "0.0.1",
+  "description": "Takes the contents of the sample file and creates a new file with the contents",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run format && npm run lint && tsc && chmod +x ./dist/index.js",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pre-commit": [
+    "format",
+    "lint",
+    "build"
+  ],
+  "files": [
+    "dist/**/*"
+  ],
+  "bin": {
+    "stf": "./dist/index.js"
+  },
+  "author": "Marnix Harderwijk <email@marnixharderwijk.com>",
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "replace-in-file": "^3.4.4"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/node": "~8.9.4",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.16.4",
+    "tslint": "^5.14.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3333",
+    "util": "^0.11.1"
+  }
+}
