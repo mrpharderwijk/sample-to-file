@@ -4,6 +4,14 @@
   "description": "Takes the contents of the sample file and creates a new file with the contents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpharderwijk/sample-to-file.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mrpharderwijk/sample-to-file/issues"
+  },
+  "homepage": "https://github.com/mrpharderwijk/sample-to-file#readme",
   "scripts": {
     "build": "npm run format && npm run lint && tsc && chmod +x ./dist/index.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
