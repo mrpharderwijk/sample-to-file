@@ -1,6 +1,6 @@
 {
   "name": "sample-to-file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Takes the contents of the sample file and creates a new file with the contents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
